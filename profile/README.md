@@ -1,9 +1,10 @@
-## Tmax HyperSQL
 <img
     src="hypersql-logo.png"
     alt="HyperSQL Logo"
-    style="display: inline-block; margin: 0 auto; width: 1024px"
+    style="display: inline-block; margin: 0 auto; width: 512px"
 />
+
+## Tmax HyperSQL
 
 Tmax HyperSQL is an open-source DBMS professional service platform brand of TmaxTibero, a DBMS specialized S/W company.
 TmaxTibero, Korea's leading DBMS company, provides PostgreSQL service as a one stop total service based on its own technology accumulated for 20 years.
