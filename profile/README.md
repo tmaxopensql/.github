@@ -1,8 +1,10 @@
+<p align="center">
 <img
     src="/profile/hypersql-logo.png"
     alt="HyperSQL Logo"
-    style="display: inline-block; margin: 0 auto; width: 512px"
+    style="display: inline-block; margin: 0 auto; width: 640px"
 />
+</p>
 
 ## Tmax HyperSQL
 
