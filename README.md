@@ -1,2 +1,2 @@
 # .github
-Welcome to Tmax HyperSQL 👋
+Welcome to Tmax OpenSQL 👋
