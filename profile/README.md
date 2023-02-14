@@ -6,9 +6,9 @@
 />
 </p>
 
-## Tmax HyperSQL
+## Tmax OpenSQL
 
-Tmax HyperSQL is an open-source DBMS professional service platform brand of TmaxTibero, a DBMS specialized S/W company.
+Tmax OpenSQL is an open-source DBMS professional service platform brand of TmaxTibero, a DBMS specialized S/W company.
 TmaxTibero, Korea's leading DBMS company, provides PostgreSQL service as a one stop total service based on its own technology accumulated for 20 years.
 
 ## TmaxTibero's Technical Leadership
@@ -17,8 +17,8 @@ TmaxTibero, Korea's leading DBMS company, provides PostgreSQL service as a one s
 - Patent: Technology power with 152 patents
 - R&D Power: About 250 of R&D employees
 
-Tmax HyperSQL provides the best integrated service for high availability, scalability, large-capacity processing, backup/recovery, security, encryption, compatibility, monitoring, and transition support technology based on TmaxTibero's unique technical experience and know-how.
+Tmax OpenSQL provides the best integrated service for high availability, scalability, large-capacity processing, backup/recovery, security, encryption, compatibility, monitoring, and transition support technology based on TmaxTibero's unique technical experience and know-how.
 
 ## Get Started
-- <a href="https://www.tmaxtibero.com/product/productView.do?seq=&rnum=&prod_cd=hypersql&detail_gubun=prod_question">Learn about Tmax HyperSQL at TmaxTibero</a>
-- <a href="https://hypersql.github.io/postgresql-knowledge/">Join Tmax HyperSQL's developer community</a>
+- <a href="https://www.tmaxtibero.com/product/productView.do?seq=&rnum=&prod_cd=hypersql&detail_gubun=prod_question">Learn about Tmax OpenSQL at TmaxTibero</a>
+- <a href="https://hypersql.github.io/postgresql-knowledge/">Join Tmax OpenSQL's developer community</a>
