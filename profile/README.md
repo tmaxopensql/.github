@@ -1,7 +1,7 @@
 <p align="center">
 <img
-    src="/profile/hypersql-logo.png"
-    alt="HyperSQL Logo"
+    src="/profile/TmaxOpenSQL_Logo_BK.png"
+    alt="Tmax OpenSQL Logo"
     style="display: inline-block; margin: 0 auto; width: 640px"
 />
 </p>
