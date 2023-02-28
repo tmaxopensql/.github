@@ -20,4 +20,4 @@ TmaxTibero, Korea's leading DBMS company, provides PostgreSQL service as a one s
 Tmax OpenSQL provides the best integrated service for high availability, scalability, large-capacity processing, backup/recovery, security, encryption, compatibility, monitoring, and transition support technology based on TmaxTibero's unique technical experience and know-how.
 
 ## Get Started
-- <a href="https://oss.tibero.com">Learn about Tmax OpenSQL at TmaxTibero</a>
+- <a href="https://oss.tibero.com">Learn more about Tmax OpenSQL at TmaxTibero</a>
