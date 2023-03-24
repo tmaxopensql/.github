@@ -16,8 +16,8 @@ jobs:
 
       - name: Determine branch type
         run: |
-          BRANCH_NAME=$(echo ${{ github.event.pull_request.head.ref }})
-          BRANCH_PREFIX=$(echo ${{ BRANCH_NAME }} | cut -d'/' -f1)
+          echo "BRANCH_NAME=${{ github.event.pull_request.head.ref }}" >> $GITHUB_ENV
+          BRANCH_PREFIX=$(echo ${{ env.BRANCH_NAME }} | cut -d'/' -f1)
           
           INCREMENTAL_TYPE="UNKNONW"
           IS_RELEASE_BRANCH=false
@@ -40,19 +40,19 @@ jobs:
           echo "IS_GH_ACTION=$IS_GH_ACTION" >> $GITHUB_ENV
           echo "INCREMENTAL_TYPE=$INCREMENTAL_TYPE" >> $GITHUB_ENV
           
-          #VALIDATE_PRE=$(echo ${{ env.BRANCH_NAME }} | cut -d'/' -f2)
-          #if [ "${VALIDATE_PRE}" == "pre" ]; then
-          #  echo "PRERELEASE_NAME=$(echo ${{ env.BRANCH_NAME }} | cut -d'/' -f3)" >> $GITHUB_ENV
-          #fi
+          VALIDATE_PRE=$(echo ${{ env.BRANCH_NAME }} | cut -d'/' -f2)
+          if [ "${VALIDATE_PRE}" == "pre" ]; then
+            echo "PRERELEASE_NAME=$(echo ${{ env.BRANCH_NAME }} | cut -d'/' -f3)" >> $GITHUB_ENV
+          fi
 
       - name: Generate Release
-        if: ${{ env.INCREMENTAL_TYPE != "UNKNOWN" }}
+        if: ${{ env.INCREMENTAL_TYPE }} != "UNKNOWN"
         uses: ./workflows/generate-release.yml
         with:
           IS_RELEASE_BRANCH: ${{ env.IS_RELEASE_BRANCH }}
           INCREMENTAL_TYPE: ${{ env.INCREMENTAL_TYPE }}
 
       - name: Error Handling
-        if: ${{ env.IS_GH_ACTION == "false" }}
+        if: ${{ env.IS_GH_ACTION }} == false
         run: echo "::error file=main.yml::Wrong Branch Name"
 
