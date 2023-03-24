@@ -15,38 +15,38 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Determine branch type
+        env:
+          BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
         run: |
-          echo "BRANCH_NAME=${{ github.event.pull_request.head.ref }}" >> $GITHUB_ENV
-          BRANCH_PREFIX=$(echo ${{ env.BRANCH_NAME }} | cut -d'/' -f1)
+          echo "BRANCH_PREFIX=$(echo ${{ env.BRANCH_NAME }} | cut -d '/' -f1)" >> $GITHUB_ENV
           
-          INCREMENTAL_TYPE="UNKNONW"
-          IS_RELEASE_BRANCH=false
-          IS_GH_ACTION=false
+          echo "INCREMENTAL_TYPE='UNKNONW'" >> $GITHUB_ENV
+          echo "IS_RELEASE_BRANCH=false" >> $GITHUB_ENV
+          echo "IS_GH_ACTION=false" >> $GITHUB_ENV
 
-          if [ "${{ BRANCH_PREFIX }}" == "release" ]; then
-            IS_RELEASE_BRANCH=true
-            INCREMENTAL_TYPE="MAJOR"
+          if [ "${{ env.BRANCH_PREFIX }}" == "release" ]; then
+            echo "IS_RELEASE_BRANCH=true" >> $GITHUB_ENV
+            echo "INCREMENTAL_TYPE='MAJOR'" >> $GITHUB_ENV
           elif [ "${{ BRANCH_PREFIX }}" == "feature" ]; then
-            INCREMENTAL_TYPE="MINOR"
+            echo "INCREMENTAL_TYPE='MINOR'" >> $GITHUB_ENV
           elif [ "${{ BRANCH_PREFIX }}" == "hotfix" ]; then
-            INCREMENTAL_TYPE="MINOR"
+            echo "INCREMENTAL_TYPE='MINOR'" >> $GITHUB_ENV
           elif [ "${{ BRANCH_PREFIX }}" == "patch" ]; then
-            INCREMENTAL_TYPE="PATCH"
+            echo "INCREMENTAL_TYPE='PATCH'" >> $GITHUB_ENV
           elif [ "${{ BRANCH_PREFIX }}" == "gh-action" ]; then
             IS_GH_ACTION=true
+            echo "INCREMENTAL_TYPE='UNKNOWN'" >> $GITHUB_ENV
+          else
+            echo "INCREMENTAL_TYPE='UNKNOWN'" >> $GITHUB_ENV
           fi
-          
-          echo "IS_RELEASE_BRANCH=$IS_RELEASE_BRANCH" >> $GITHUB_ENV 
-          echo "IS_GH_ACTION=$IS_GH_ACTION" >> $GITHUB_ENV
-          echo "INCREMENTAL_TYPE=$INCREMENTAL_TYPE" >> $GITHUB_ENV
           
           VALIDATE_PRE=$(echo ${{ env.BRANCH_NAME }} | cut -d'/' -f2)
           if [ "${VALIDATE_PRE}" == "pre" ]; then
-            echo "PRERELEASE_NAME=$(echo ${{ env.BRANCH_NAME }} | cut -d'/' -f3)" >> $GITHUB_ENV
+            echo "PRERELEASE_NAME=$(echo ${{ env.BRANCH_NAME }} | cut -d '/' -f3)" >> $GITHUB_ENV
           fi
 
       - name: Generate Release
-        if: ${{ env.INCREMENTAL_TYPE }} != "UNKNOWN"
+        if: ${{ env.INCREMENTAL_TYPE }} != 'UNKNOWN'
         uses: ./workflows/generate-release.yml
         with:
           IS_RELEASE_BRANCH: ${{ env.IS_RELEASE_BRANCH }}
