@@ -16,7 +16,7 @@ jobs:
 
       - name: Determine branch type
         run: |
-          BRANCH_NAME=${{ github.event.pull_request.head.ref }}
+          BRANCH_NAME=$(echo ${{ github.event.pull_request.head.ref }})
           BRANCH_PREFIX=$(echo ${{ BRANCH_NAME }} | cut -d'/' -f1)
           
           INCREMENTAL_TYPE="UNKNONW"
