@@ -1,0 +1,58 @@
+name: release-automation
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+jobs:
+  check_pr_branch_type:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    steps:
+      - name: Checkout repository 
+        uses: actions/checkout@v2
+
+      - name: Determine branch type
+        run: |
+          BRANCH_NAME=${{ github.event.pull_request.head.ref }}
+          BRANCH_PREFIX=$(echo ${{ BRANCH_NAME }} | cut -d'/' -f1)
+          
+          INCREMENTAL_TYPE="UNKNONW"
+          IS_RELEASE_BRANCH=false
+          IS_GH_ACTION=false
+
+          if [ "${{ BRANCH_PREFIX }}" == "release" ]; then
+            IS_RELEASE_BRANCH=true
+            INCREMENTAL_TYPE="MAJOR"
+          elif [ "${{ BRANCH_PREFIX }}" == "feature" ]; then
+            INCREMENTAL_TYPE="MINOR"
+          elif [ "${{ BRANCH_PREFIX }}" == "hotfix" ]; then
+            INCREMENTAL_TYPE="MINOR"
+          elif [ "${{ BRANCH_PREFIX }}" == "patch" ]; then
+            INCREMENTAL_TYPE="PATCH"
+          elif [ "${{ BRANCH_PREFIX }}" == "gh-action" ]; then
+            IS_GH_ACTION=true
+          fi
+          
+          echo "IS_RELEASE_BRANCH=$IS_RELEASE_BRANCH" >> $GITHUB_ENV 
+          echo "IS_GH_ACTION=$IS_GH_ACTION" >> $GITHUB_ENV
+          echo "INCREMENTAL_TYPE=$INCREMENTAL_TYPE" >> $GITHUB_ENV
+          
+          #VALIDATE_PRE=$(echo ${{ env.BRANCH_NAME }} | cut -d'/' -f2)
+          #if [ "${VALIDATE_PRE}" == "pre" ]; then
+          #  echo "PRERELEASE_NAME=$(echo ${{ env.BRANCH_NAME }} | cut -d'/' -f3)" >> $GITHUB_ENV
+          #fi
+
+      - name: Generate Release
+        if: ${{ env.INCREMENTAL_TYPE != "UNKNOWN" }}
+        uses: ./workflows/generate-release.yml
+        with:
+          IS_RELEASE_BRANCH: ${{ env.IS_RELEASE_BRANCH }}
+          INCREMENTAL_TYPE: ${{ env.INCREMENTAL_TYPE }}
+
+      - name: Error Handling
+        if: ${{ env.IS_GH_ACTION == "false" }}
+        run: echo "::error file=main.yml::Wrong Branch Name"
+
