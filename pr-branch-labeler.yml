@@ -16,3 +16,8 @@ hotfix:
 # Apply label "patch" if head matches "patch/*"
 patch:
   head: "patch/*"
+
+# Apply label "gh-action" if head matches "gh-action/*"
+patch:
+  head: "gh-action/*"
+
