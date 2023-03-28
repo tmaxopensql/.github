@@ -1,4 +1,3 @@
-
 name: create-new-release
 
 # To use this workflow, you need to add "GIT_ACCESS_TOKEN" secret to your repository
