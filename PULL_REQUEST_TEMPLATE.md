@@ -4,8 +4,8 @@
 - [ ] Patch
 - [ ] Others
 
-## Content:
+## Content
 -
 
-## Reproduction Steps:
+## Reproduction Steps
 -
