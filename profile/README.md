@@ -1,6 +1,6 @@
 <p align="center">
 <img
-    src="/profile/TmaxOpenSQL_Logo.png"
+    src="/profile/TmaxOpenSQL_Logo.jpg"
     alt="Tmax OpenSQL Logo"
     style="display: inline-block; margin: 0 auto; width: 640px"
 />
